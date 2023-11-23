@@ -704,7 +704,7 @@ public:
 
         if constexpr (HasCudaTexture) {
             if (m_migrated && force_nonaccel)
-                jit_log(::LogLevel::Warn,
+                jit_log(::DrLogLevel::Warn,
                         "\"force_nonaccel\" is used while the data has been fully "
                         "migrated to CUDA texture memory");
         }

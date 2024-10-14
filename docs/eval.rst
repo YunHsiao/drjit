@@ -279,8 +279,8 @@ Analyzing JIT behavior
 Tracing and evaluation run silently behind the scenes, but sometimes it can be
 useful to watch this process as it occurs. For this, call
 :py:func:`dr.set_log_level() <drjit.log_level>` to set the log level to a value
-of :py:attr:`Info <drjit.LogLevel.Info>` or lower (the default is
-:py:attr:`Warn <drjit.LogLevel.Warn>`).
+of :py:attr:`Info <drjit.DrJitLogLevel.Info>` or lower (the default is
+:py:attr:`Warn <drjit.DrJitLogLevel.Warn>`).
 
 .. code-block:: pycon
    :emphasize-lines: 6, 8, 9, 10, 11
@@ -290,7 +290,7 @@ of :py:attr:`Info <drjit.LogLevel.Info>` or lower (the default is
 
    >>> x = dr.arange(Float, 1024)
    >>> y = x + 1
-   >>> dr.set_log_level(dr.LogLevel.Info)
+   >>> dr.set_log_level(dr.DrJitLogLevel.Info)
    >>> y
    jit_eval(): launching 1 kernel.
      -> launching c77f588e6b5e7e2f (n=1024, in=0, out=1, ops=8, jit=33.12 us):

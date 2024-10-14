@@ -89,7 +89,7 @@ auto if_stmt_impl(std::index_sequence<Is...>, Args &&args, const Mask &cond,
         detail::collect_indices<true>(isd->args, args_i);
 
         bool all_done = ad_cond(Mask::Backend, -1, name, isd.get(), cond.index(),
-                                args_i, rv_i, body_cb, delete_cb, true);
+                                args_i, rv_i, body_cb, delete_cb, is_diff_v<Return>);
 
         Return rv = std::move(isd->rv);
 

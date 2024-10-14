@@ -77,7 +77,7 @@ static bool ad_loop_symbolic(JitBackend backend, const char *name,
             // Potentially optimize the loop away
             if (jit_var_is_zero_literal(active_initial) &&
                 jit_flag(JitFlag::OptimizeLoops)) {
-                jit_log(LogLevel::InfoSym,
+                jit_log(DrJitLogLevel::InfoSym,
                         "ad_loop_symbolic(\"%s\"): optimized away (loop "
                         "condition is 'false').", name);
                 write_cb(payload, backup, false);
@@ -163,7 +163,7 @@ static size_t ad_loop_evaluated_mask(JitBackend backend, const char *name,
         if (!jit_var_any(active.index()))
             break;
 
-        jit_log(LogLevel::InfoSym,
+        jit_log(DrJitLogLevel::InfoSym,
                 "ad_loop_evaluated(\"%s\"): executing loop iteration %zu.",
                 name, ++it);
 
@@ -386,7 +386,7 @@ ad_loop_evaluated_compress(JitBackend backend, const char *name, void *payload,
             break; // all done!
 
         if (size != size_next)
-            jit_log(LogLevel::InfoSym,
+            jit_log(DrJitLogLevel::InfoSym,
                     "ad_loop_evaluated(\"%s\"): compressed loop state from %u "
                     "to %u entries.", name, size, size_next);
 
@@ -394,7 +394,7 @@ ad_loop_evaluated_compress(JitBackend backend, const char *name, void *payload,
         write_cb(payload, indices, false);
         indices.release();
 
-        jit_log(LogLevel::InfoSym,
+        jit_log(DrJitLogLevel::InfoSym,
                 "ad_loop_evaluated(\"%s\"): executing loop iteration %zu.", name, ++it);
 
         // Execute the loop body
@@ -421,7 +421,7 @@ static void ad_loop_evaluated(JitBackend backend, const char *name,
                               bool compress) {
     index64_vector indices;
 
-    jit_log(LogLevel::InfoSym,
+    jit_log(DrJitLogLevel::InfoSym,
             "ad_loop_evaluated(\"%s\"): evaluating initial loop state.", name);
 
     // Before the loop starts, make the loop state opaque to ensure proper kernel caching
@@ -444,7 +444,7 @@ static void ad_loop_evaluated(JitBackend backend, const char *name,
 
     if (compress && size == 1) {
         jit_log(
-            LogLevel::Warn,
+            DrJitLogLevel::Warn,
             "ad_loop_evaluated(\"%s\"): loop state compression requires a "
             "non-scalar loop condition, switching to the default masked mode!");
         compress = false;
@@ -460,7 +460,7 @@ static void ad_loop_evaluated(JitBackend backend, const char *name,
                                     cond_cb, body_cb, std::move(indices),
                                     std::move(active));
 
-    jit_log(LogLevel::Debug,
+    jit_log(DrJitLogLevel::Debug,
             "ad_loop_evaluated(\"%s\"): loop finished after %zu iterations.", name, it);
 }
 
@@ -893,7 +893,7 @@ bool ad_loop(JitBackend backend, int symbolic, int compress,
         if (flags & (uint32_t) JitFlag::SymbolicScope) {
             // We're inside some other symbolic operation, cannot use evaluated mode
             if (!jit_flag(JitFlag::SymbolicLoops))
-                jit_log(LogLevel::Warn,
+                jit_log(DrJitLogLevel::Warn,
                         "ad_loop(\"%s\"): forcing conditional statement to "
                         "symbolic mode since the operation is nested within "
                         "another symbolic operation).", name);

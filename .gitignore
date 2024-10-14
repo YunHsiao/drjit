@@ -16,6 +16,8 @@ Makefile
 
 # Miscellaneous;
 /build*
+/cmake-build-*
+/.idea
 /Testing
 /tests/Testing
 *.dir

@@ -560,7 +560,7 @@ differentiation).
 Debugging
 ---------
 
-.. autoenum:: LogLevel
+.. autoenum:: DrJitLogLevel
 .. autofunction:: assert_true
 .. autofunction:: assert_false
 .. autofunction:: assert_equal

@@ -1,6 +1,6 @@
 add_library(
   drjit-extra
-  SHARED
+  STATIC
 
   common.h
   math.cpp

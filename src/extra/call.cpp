@@ -86,7 +86,7 @@ static void ad_call_getter(JitBackend backend, const char *domain,
     const char *domain_or_empty = domain ? domain : "",
                *separator = domain ? "::" : "";
 
-    jit_log(LogLevel::InfoSym,
+    jit_log(DrJitLogLevel::InfoSym,
             "ad_call_getter(\"%s%s%s\", index=r%u, mask=r%u)", domain_or_empty,
             separator, name, index, mask.index());
 
@@ -800,7 +800,7 @@ bool ad_call(JitBackend backend, const char *domain, int symbolic,
             if (jit_flag(JitFlag::SymbolicScope)) {
                 // We're inside some other symbolic operation, cannot use evaluated mode
                 if (!jit_flag(JitFlag::SymbolicCalls))
-                    jit_log(LogLevel::Warn,
+                    jit_log(DrJitLogLevel::Warn,
                             "ad_call(\"%s\"): currently inside some other symbolic "
                             "operation, forcefully running the vectorizd call "
                             "in symbolic " "mode even though the feature flag "

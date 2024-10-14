@@ -186,7 +186,7 @@ each line corresponds to the creation of an internal flat array.
 
    >>> a = dr.llvm.Array3f(...)
    >>> b = dr.llvm.Array3f(...)
-   >>> dr.set_log_level(dr.LogLevel.Debug)
+   >>> dr.set_log_level(dr.DrJitLogLevel.Debug)
    >>> angle = dr.acos(a @ b)
    jit_var_new(): float32 r7 = mul(r1, r4)
    jit_var_new(): float32 r8 = fma(r2, r5, r7)

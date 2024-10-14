@@ -26,8 +26,8 @@
 #  define DRJIT_PACK
 #  define DRJIT_LIKELY(x)              x
 #  define DRJIT_UNLIKELY(x)            x
-#  define DRJIT_IMPORT                 __declspec(dllimport)
-#  define DRJIT_EXPORT                 __declspec(dllexport)
+#  define DRJIT_IMPORT
+#  define DRJIT_EXPORT
 #  define DRJIT_TRIVIAL_ABI
 #  define DRJIT_NO_UBSAN
 #else

@@ -105,7 +105,7 @@ def test_packages(name='p'):
 @pytest.fixture(scope="function")
 def drjit_verbose():
     level = dr.log_level()
-    dr.set_log_level(dr.LogLevel.Trace)
+    dr.set_log_level(dr.DrJitLogLevel.Trace)
     yield
     dr.set_log_level(level)
 

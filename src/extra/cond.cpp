@@ -27,7 +27,7 @@ static void ad_cond_evaluated(JitBackend backend, const char *label,
                               void *payload, uint32_t cond_t, uint32_t cond_f,
                               const dr::vector<uint64_t> &args,
                               dr::vector<uint64_t> &rv, ad_cond_body body_cb) {
-    jit_log(LogLevel::InfoSym,
+    jit_log(DrJitLogLevel::InfoSym,
             "ad_cond_evaluated(\"%s\"): executing conditional expression.",
             label);
 
@@ -590,7 +590,7 @@ bool ad_cond(JitBackend backend, int symbolic, const char *label, void *payload,
         if (flags & (uint32_t) JitFlag::SymbolicScope) {
             // We're inside some other symbolic operation, cannot use evaluated mode
             if (!jit_flag(JitFlag::SymbolicCalls))
-                jit_log(LogLevel::Warn,
+                jit_log(DrJitLogLevel::Warn,
                         "ad_cond(\"%s\"): forcing conditional statement to "
                         "symbolic mode since the operation is nested within "
                         "another symbolic operation).", label);
@@ -604,7 +604,7 @@ bool ad_cond(JitBackend backend, int symbolic, const char *label, void *payload,
         jit_raise("'symbolic' must equal 0, 1, or -1.");
 
     if (jit_var_state(cond) == VarState::Literal) {
-        jit_log(LogLevel::InfoSym,
+        jit_log(DrJitLogLevel::InfoSym,
                 "ad_cond_evaluated(\"%s\"): removing conditional expression "
                 "with uniform condition.", label);
         body_cb(payload, !jit_var_is_zero_literal(cond), args, rv);

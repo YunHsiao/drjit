@@ -4748,7 +4748,7 @@
        forcing the system to re-generate and re-compile code at every iteration,
        and this can ultimately dominate the execution time. If in doubt, increase
        the log level of Dr.Jit (:py:func:`drjit.set_log_level` to
-       :py:attr:`drjit.LogLevel.Info`) and check if the kernels being
+       :py:attr:`drjit.DrJitLogLevel.Info`) and check if the kernels being
        launched contain the term ``cache miss``. You can also inspect the *Kernels
        launched* line in the output of :py:func:`drjit.whos`. If you observe soft
        or hard misses at every loop iteration, then kernel caching isn't working

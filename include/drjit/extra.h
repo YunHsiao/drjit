@@ -20,9 +20,9 @@ extern "C" {
 
 #if defined(_MSC_VER)
 #  if defined(DRJIT_EXTRA_BUILD)
-#    define DRJIT_EXTRA_EXPORT    __declspec(dllexport)
+#    define DRJIT_EXTRA_EXPORT
 #  else
-#    define DRJIT_EXTRA_EXPORT    __declspec(dllimport)
+#    define DRJIT_EXTRA_EXPORT
 #  endif
 #else
 #  define DRJIT_EXTRA_EXPORT __attribute__ ((visibility("default")))

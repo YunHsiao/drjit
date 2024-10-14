@@ -374,7 +374,7 @@ struct Variable {
 };
 
 /// Represents the global state of the AD system
-struct State {
+struct ExtraState {
     /// std::mutex protecting the state data structure
     std::mutex mutex;
 
@@ -391,12 +391,12 @@ struct State {
     /// Counter to establish an ordering among variables
     uint64_t counter = 0;
 
-    State() {
+    ExtraState() {
         variables.resize(1);
         edges.resize(1);
     }
 
-    ~State() {
+    ~ExtraState() {
         size_t vars_used  = variables.size() - unused_variables.size() - 1,
                edges_used = edges.size() - unused_edges.size() - 1;
 
@@ -580,7 +580,7 @@ struct LocalState {
     }
 };
 
-static State state;
+static ExtraState state;
 static thread_local LocalState local_state;
 
 #if defined(DRJIT_SANITIZE_INTENSE)
@@ -1426,7 +1426,7 @@ void ad_traverse(dr::ADMode mode, uint32_t flags) {
 
     LocalState &ls = local_state;
     std::vector<EdgeRef> &todo_tls = ls.todo, todo;
-    jit_log(LogLevel::InfoSym,
+    jit_log(DrJitLogLevel::InfoSym,
             "ad_traverse(): processing %zu edges in %s mode ..", todo_tls.size(),
             mode == dr::ADMode::Forward ? "forward" : "backward");
 
